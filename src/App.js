@@ -8,7 +8,7 @@ function App() {
     <Container fluid className="App">     
         <header className="App-header">       
           <p>
-          GitHub Search
+          GitHub User Search
           </p>
         </header>
         <main>

@@ -13,12 +13,19 @@ export default class GitHubPagination extends React.Component
 
         let activePageNum = this.props.pageNum;
 
-        let totalPageCount = this.props.totalResultCount / 100;
+        let totalPageCount = Math.ceil(this.props.totalResultCount / 20);
 
-        let displayPageNums; 
+        let displayPageNums = []; 
 
-        if(activePageNum < 4)
+        if(activePageNum < 4 && totalPageCount > 5)
             displayPageNums = [1,2,3,4,5]
+        else if(totalPageCount < 5)
+        {
+            for(let i = 1; i <= totalPageCount; i++)
+            {
+                displayPageNums.push(i);
+            }
+        }
         else
             displayPageNums=[activePageNum-3, activePageNum-2,activePageNum-1, activePageNum, activePageNum+1 ]
         
@@ -30,16 +37,16 @@ export default class GitHubPagination extends React.Component
                         <Pagination>
                         <Pagination.First onClick={() => this.props.onPageChange(1)} />
                         <Pagination.Prev onClick={() => this.props.onPageChange(activePageNum-1)} />    
-                        {/* {activePageNum > 3 && <Pagination.Item onClick={() => this.props.onPageChange(1)}>{1}</Pagination.Item>}               */}
+                       
 
                         {displayPageNums.map(page => activePageNum === page ? 
                         <Pagination.Item key={page} active onClick={() => this.props.onPageChange(page)}>{page}</Pagination.Item> 
                         : <Pagination.Item key={page} onClick={() => this.props.onPageChange(page)}>{page}</Pagination.Item> )}
 
 
-                        {/* {activePageNum > totalPageCount-3 && <Pagination.Item onClick={() => this.props.onPageChange(totalPageCount)}>{totalPageCount}</Pagination.Item>}               */}
+                        
                         <Pagination.Next onClick={() => this.props.onPageChange(activePageNum + 1)} />
-                        <Pagination.Last onClick={() => this.props.onPageChange(totalPageCount)} />
+                        <Pagination.Last onClick={() => this.props.onPageChange(totalPageCount + 1)} />
                         </Pagination>
 
                        

@@ -6,7 +6,7 @@ import GitHubPagination from './GitHubPagination'
 import UserSearchResultTable from './UserSearchResultTable';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Alert } from 'bootstrap';
+import Button from 'react-bootstrap/Button';
 
 
 export default class GitHubUserSearch extends React.Component
@@ -18,6 +18,7 @@ export default class GitHubUserSearch extends React.Component
         this.handleChange = this.handleChange.bind(this);
         this.handleSelectedUser = this.handleSelectedUser.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
 
@@ -28,6 +29,15 @@ export default class GitHubUserSearch extends React.Component
     componentDidUpdate(prevProps,prevState)
     {
         if(prevState.userInput !== this.state.userInput && this.state.userInput.length >= 3 )
+        {
+            this.setState({page : 1})
+            this.loadSeachUserResult();
+        }
+    }
+
+    handleSearch()
+    {
+        if(this.state.userInput.length >= 3 )
         {
             this.setState({page : 1})
             this.loadSeachUserResult();
@@ -45,7 +55,7 @@ export default class GitHubUserSearch extends React.Component
         }
         else
         {
-            alert("Max Number of searches reach please wait 60 seconds to continue search");
+            alert("Max Number of searches reached please wait 60 seconds to continue search");
         }
     }
 
@@ -60,7 +70,7 @@ export default class GitHubUserSearch extends React.Component
         }
         else
         {
-            alert("Max Number of searches reach please wait 60 seconds to continue search");
+            alert("Max Number of searches reached please wait 60 seconds to continue search");
         }
 
        
@@ -83,7 +93,14 @@ export default class GitHubUserSearch extends React.Component
                         <GitHubSearchInput userInput={this.state.userInput} onChange={this.handleChange}/>
                     </Col>
                 </Row>
-                <Row> <Col>  <h6> Total Found: {this.state.totalResultCount} </h6> </Col></Row>
+                <Row className="row-margin">
+                     {/* <Col xs={1}>  
+                        <Button variant="secondary" onClick={this.handleSearch}> Search </Button>
+                    </Col>  */}
+                    <Col>  
+                    <h6> Total Found: {this.state.totalResultCount} </h6> 
+                    </Col>  
+                </Row>
                 <Row>
                     <Col xs={3}> 
                        
