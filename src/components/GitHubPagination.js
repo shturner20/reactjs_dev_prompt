@@ -7,8 +7,8 @@ import Col from 'react-bootstrap/Col';
 export default class GitHubPagination extends React.Component
 {
     render(){
-
-        if(this.props.totalResultCount === 0)
+     
+        if(this.props.totalResultCount === 0  )
             return null;
 
         let activePageNum = this.props.pageNum;
@@ -33,7 +33,7 @@ export default class GitHubPagination extends React.Component
         
        
         return (
-            <div>
+            <div style={{display: this.props.disabled ? 'none' : 'inline'}} >
                 <Row>
                     <Col>
                         <Pagination>

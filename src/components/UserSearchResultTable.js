@@ -18,7 +18,7 @@ export default class UserSearchResultTable extends React.Component
          tableRows =  searchResult.map(user =>
                 ( <tr key={user.login} scope="row"> 
                     <td>{user.login} </td> 
-                    <td><Button variant="dark" onClick={() => this.props.onSelected(user.login)}>ViewProfile</Button> </td> 
+                    <td><Button variant="dark" onClick={() => this.props.onSelected(user.login)}>View Info</Button> </td> 
                 </tr>)
                 );
                 

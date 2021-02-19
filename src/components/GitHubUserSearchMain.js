@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 
 
 
+
 export default class GitHubUserSearchMain extends React.Component
 {
     constructor(props)
@@ -27,10 +28,15 @@ export default class GitHubUserSearchMain extends React.Component
 
     componentDidUpdate(prevProps,prevState)
     {
-        if(prevState.userInput !== this.state.userInput && this.state.userInput.length >= 3 )
+        if(prevState.userInput !== this.state.userInput 
+        && this.state.userInput !== "")
         {
             this.setState({page : 1})
             this.loadSeachUserResult();
+        }
+        else if(prevState.userInput !== this.state.userInput && this.state.userInput === "" )
+        {
+            this.setState({totalResultCount : 0, searchResults: null, user: null})
         }
     }
 
@@ -41,7 +47,10 @@ export default class GitHubUserSearchMain extends React.Component
 
         if(!result['error'])
         {
-            this.setState({searchResults: result.data, totalResultCount: result.totalResultCount  })
+            if(result.totalResultCount  > 0)
+                this.setState({searchResults: result.data, totalResultCount: result.totalResultCount  })
+            else
+                this.setState({totalResultCount : 0, searchResults: null, user: null})
         }
         else
         {
@@ -51,7 +60,7 @@ export default class GitHubUserSearchMain extends React.Component
 
     async handleSelectedUser(username)
     {  
-        this.setState({user: {}})
+
         const result = await GetUserInfo(username)
 
         if(!result.error)
@@ -90,7 +99,7 @@ export default class GitHubUserSearchMain extends React.Component
                     <Col xs={3}> 
                        
                         <UserSearchResultTable  usersResult={this.state.searchResults} totalResultCount={this.state.totalResultCount} onSelected={this.handleSelectedUser} />
-                        <GitHubPagination pageNum={this.state.page} totalResultCount={this.state.totalResultCount} onPageChange={this.handlePageChange} /> 
+                        <GitHubPagination  pageNum={this.state.page} totalResultCount={this.state.totalResultCount} onPageChange={this.handlePageChange} /> 
                        
                     </Col>
                     <Col> 

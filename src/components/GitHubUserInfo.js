@@ -11,7 +11,7 @@ export default class GitHubUserInfo extends React.Component
         if(user === null)
             return null;
 
-        const repoUrl = "https://github.com/" + user.login + "?tab=repositories";
+        const repoUrl = `https://github.com/${user.login}?tab=repositories`;
 
         return (
                 <div className="Profile">
@@ -24,8 +24,8 @@ export default class GitHubUserInfo extends React.Component
                         <Col> 
                            <img src={user.avatar_url} alt="Profile Pic" />
                            <p>Email: {user.email !== null ? user.email: 'Unavaliable'}</p>
-                           <p>Location:  {user.location} </p>
-                           <p>Real Name:  {user.name} </p>
+                           <p>Location:  {user.location !== null ? user.location: 'Unavaliable'} </p>
+                           <p>Name:  {user.name ? user.name: 'Unavaliable'} </p>
                            <p>Public Repos:  <a target="_blank" href={repoUrl}> {user.public_repos} </a> </p>
                            <p>Account Created:  { new Date(Date.parse(user.created_at)).toLocaleDateString()}  </p>
                            <p>Last Updated: { new Date(Date.parse(user.updated_at)).toLocaleDateString()} </p>
