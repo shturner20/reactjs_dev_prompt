@@ -1,11 +1,10 @@
 import { Octokit } from "@octokit/core"
 
-const octokit = new Octokit({ auth: `f5defa8f91ec2134433e8d7260f29c5879c3007d` });
+const octokit = new Octokit({ auth: `03a7a99f3168bee482c193fe696e237e3d690eee` });
 
 
 export async function SearchUsers(searchtext,pageNum)
 {
-  console.log("Page:" + pageNum);
   try {
       const response = await octokit.request('GET /search/users', {
         q:  searchtext + "in:login+in:email" ,
@@ -15,6 +14,7 @@ export async function SearchUsers(searchtext,pageNum)
      
       return  {data: response.data.items, totalResultCount: response.data.total_count, error: null};
   } catch (error) {
+    console.log(error);
     return {error: error};
   }
     
@@ -29,6 +29,7 @@ export async function GetUserInfo(username)
     console.log(response.data);
     return {data: response.data};
   } catch (error) {
+    console.log(error);
     return {error: error} ;
   }
     

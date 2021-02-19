@@ -21,15 +21,11 @@ export default class UserSearchResultTable extends React.Component
                     <td><Button variant="dark" onClick={() => this.props.onSelected(user.login)}>ViewProfile</Button> </td> 
                 </tr>)
                 );
-        
-        let pagination;
-
-
-        
+                
         return (
             <Row>
                     <Col>
-                            <div className="TableDiv">
+                        <div className="TableDiv">
                             <Table striped bordered hover className="ResultTable">
                                 <thead>
                                 <tr>
@@ -38,7 +34,7 @@ export default class UserSearchResultTable extends React.Component
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {tableRows}
+                                    {tableRows}
                                 </tbody>  
                             </Table>
                         </div>

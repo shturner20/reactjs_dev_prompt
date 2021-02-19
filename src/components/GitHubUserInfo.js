@@ -5,8 +5,6 @@ import Col from 'react-bootstrap/Col';
 export default class GitHubUserInfo extends React.Component
 {
 
-    
-   
     render(){
         const user = this.props.user;
 
@@ -14,11 +12,6 @@ export default class GitHubUserInfo extends React.Component
             return null;
 
         const repoUrl = "https://github.com/" + user.login + "?tab=repositories";
-
-
-      
-        
-
 
         return (
                 <div className="Profile">
@@ -36,9 +29,6 @@ export default class GitHubUserInfo extends React.Component
                            <p>Public Repos:  <a target="_blank" href={repoUrl}> {user.public_repos} </a> </p>
                            <p>Account Created:  { new Date(Date.parse(user.created_at)).toLocaleDateString()}  </p>
                            <p>Last Updated: { new Date(Date.parse(user.updated_at)).toLocaleDateString()} </p>
-                        </Col>
-                        <Col>
-                           
                         </Col>
                     </Row>                  
                 </div>

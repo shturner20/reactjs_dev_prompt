@@ -17,7 +17,7 @@ export default class GitHubPagination extends React.Component
 
         let displayPageNums = []; 
 
-        if(activePageNum < 4 && totalPageCount > 5)
+        if(activePageNum < 4 && totalPageCount >= 5)
             displayPageNums = [1,2,3,4,5]
         else if(totalPageCount < 5)
         {
@@ -26,6 +26,8 @@ export default class GitHubPagination extends React.Component
                 displayPageNums.push(i);
             }
         }
+        else if(activePageNum === totalPageCount)
+            displayPageNums=[activePageNum-4, activePageNum-3,activePageNum-2, activePageNum-1,activePageNum ]
         else
             displayPageNums=[activePageNum-3, activePageNum-2,activePageNum-1, activePageNum, activePageNum+1 ]
         
@@ -36,7 +38,7 @@ export default class GitHubPagination extends React.Component
                     <Col>
                         <Pagination>
                         <Pagination.First onClick={() => this.props.onPageChange(1)} />
-                        <Pagination.Prev onClick={() => this.props.onPageChange(activePageNum-1)} />    
+                        <Pagination.Prev onClick={() => activePageNum > 1 && this.props.onPageChange(activePageNum-1)} />    
                        
 
                         {displayPageNums.map(page => activePageNum === page ? 
@@ -45,8 +47,8 @@ export default class GitHubPagination extends React.Component
 
 
                         
-                        <Pagination.Next onClick={() => this.props.onPageChange(activePageNum + 1)} />
-                        <Pagination.Last onClick={() => this.props.onPageChange(totalPageCount + 1)} />
+                        <Pagination.Next onClick={() => activePageNum !== totalPageCount &&  this.props.onPageChange(activePageNum + 1)} />
+                        <Pagination.Last onClick={() => this.props.onPageChange(totalPageCount)} />
                         </Pagination>
 
                        

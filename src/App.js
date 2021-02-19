@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import GitHubUserSearch from './components/GitHubUserSearch'
+import GitHubUserSearch from './components/GitHubUserSearchMain'
 import Container from 'react-bootstrap/Container';
 
 function App() {
